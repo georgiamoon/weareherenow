@@ -25,7 +25,7 @@ Foursquare is used more in Moscow and Tokyo than anywhere else and its use in th
 Looking at these global cities provides a sense of how people travel around the city, where there are employment and commercial centers, and seasonal preferences – such as the indoor malls in Moscow. In Tokyo and Mumbai, the infrastructure of the transportation system is clearly visible as the nervous system of the city. Social Media can provide rich data about urban form and land use which is otherwise unavailable for many cities around the world – providing a new tool for research about how people respond and interact with cities in a way never before achieved.
 
 
-<strong>Spatial Information Design Lab</strong>
-<strong>Project Lead: </strong>Sarah Williams, Co-Director Spatial Information Design Lab
-<strong>Research Associates:</strong> Juan Francisco Saldarriaga (Project Manager), Georgia Bullen, Francis Tan, Noa Younse, Bryan Valentini
+<strong>Spatial Information Design Lab</strong><br>
+<strong>Project Lead: </strong>Sarah Williams, Co-Director Spatial Information Design Lab<br>
+<strong>Research Associates:</strong> Juan Francisco Saldarriaga (Project Manager), Georgia Bullen, Francis Tan, Noa Younse, Bryan Valentini<br>
 <strong>Student Researchers:</strong> Fatima Abdul-Nabi, Adare Blumenfeld, Caitlin Hackett, Jen So Godzeno, Alex McQuilkin, Tiffany Rattray, Carlos Salazar Echavarría, Fred Sham, Nathan Tinclair
