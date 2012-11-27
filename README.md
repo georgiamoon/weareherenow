@@ -27,5 +27,5 @@ Looking at these global cities provides a sense of how people travel around the 
 
 <strong>Spatial Information Design Lab</strong><br>
 <strong>Project Lead: </strong>Sarah Williams, Co-Director Spatial Information Design Lab<br>
-<strong>Research Associates:</strong> Juan Francisco Saldarriaga (Project Manager), Georgia Bullen, Francis Tan, Noa Younse, Bryan Valentini<br>
+<strong>Research Associates:</strong> Juan Francisco Saldarriaga (Project Manager), Georgia Bullen (@georgiamoon), Francis Tan, Noa Younse, Bryan Valentini (@transistorize)<br>
 <strong>Student Researchers:</strong> Fatima Abdul-Nabi, Adare Blumenfeld, Caitlin Hackett, Jen So Godzeno, Alex McQuilkin, Tiffany Rattray, Carlos Salazar Echavarría, Fred Sham, Nathan Tinclair
