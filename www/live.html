@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Live NYC</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.4/leaflet.css" />
+		<!--[if lte IE 8]>
+  	  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.4/leaflet.ie.css" />
+		<![endif]-->
+
+	<script src="http://cdn.leafletjs.com/leaflet-0.4.4/leaflet.js"></script>
+	
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<!--<script src="../debug/leaflet-include.js"></script>-->
+
+	<style type="text/css">
+      /* <![CDATA[ */
+	
+	body {
+  	  margin: 60px 0px 0px 55px;
+	  font-family: verdana, geneva, arial, helvetica, sans-serif; 
+	  font-size: 11px; 
+	  color: #FFF;
+	  background-color: #000; 
+	  text-decoration: none; 
+	  font-weight: normal; 
+	  line-height: normal; 
+	}
+	
+	a          { color: #F00; }
+	a:link     { color: #F00; text-decoration: none; }
+	a:visited  { color: #F00; text-decoration: none; }
+	a:active   { color: #F00; text-decoration: none; }
+	a:hover    { color: #F00; text-decoration: underline; }
+
+      /* ]]> */
+    </style>
+
+<span style="font-size:20px; padding-left:20px;">
+ <a href="index.html">WE ARE HERE NOW</a> | <a href="about.html">ABOUT</a> | <a href="live.html">LIVE NYC</a>
+ </span>
+  <span style="font-size: 14px">
+  <table cellspacing="20">
+  <tr>
+  <td><a href="nyc.html">NEW YORK CITY</a></td>
+  <td><a href="mexicocity.html">MEXICO CITY</a></td>
+  <td><a href="moscow.html">MOSCOW</a></td>
+  <td><a href="rio.html">RIO DE JANEIRO</a></td>
+  <td><a href="mumbai.html">MUMBAI</a></td>
+  <td><a href="beijing.html">BEIJING</a></td>
+  <td><a href="tokyo.html">TOKYO</a></td>
+  </tr>
+</table></span>
+
+</head>
+
+<body style="background:#000;">
+<div id="map" style="width:800px; height: 600px;"></div>
+
+<script>
+	var map = new L.Map('map');
+	var dataLayer;
+	map.on('load', returnBounds);
+
+	var cloudmadeUrl = 'http://{s}.tiles.mapbox.com/v2/georgiabullen.map-fgfrh2na/{z}/{x}/{y}.png',
+			cloudmadeAttribution = 'Map data &copy; 2012 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+			cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution});
+
+	map.setView(new L.LatLng(40.719, -73.959), 12, true).addLayer(cloudmade);
+	
+		map.on('viewreset dragend', returnBounds);
+
+	
+	//what to do with each feature
+	function onEachFeature(feature, layer) {
+		var popupContent = "";
+		if (feature.properties && feature.properties.popupContent) {
+			popupContent += "<span style=\"color:#000;\" ><strong>Name:</strong> " + feature.properties.name + "<br/><strong>Category:</strong> " + feature.properties.category + "<br/><strong>Here Now:</strong> " +  feature.properties.herenow + "</span>";
+		}
+		layer.bindPopup(popupContent);
+	} 
+		//query the DB function for data
+	function queryDB(xlow, ylow, xhigh, yhigh){
+	this.xlow = xlow;
+	this.ylow = ylow;
+	this.xhigh = xhigh;
+	this.yhigh = yhigh;
+	
+	if(dataLayer != null){dataLayer.clearLayers();} //<-- doesn't work!!
+
+	//request all the data, format as geoJson & style as described in the code
+	var request = $.getJSON("http://weareherenow.org/query-geojson2.php?xhigh="+xhigh+"&xlow="+xlow+"&yhigh="+yhigh+"&ylow="+ylow, function(datafile){
+		console.log(datafile);		
+		dataLayer = L.geoJson(datafile, {
+			style: function (feature) {
+				return feature.properties && feature.properties.style;
+			},
+			onEachFeature: onEachFeature,
+			pointToLayer: function (feature, latlng) {
+				return new L.circleMarker(latlng).setRadius(feature.properties.radius);
+			} 
+		}).addTo(map);
+		
+		
+		});
+	}
+	
+	//get the bounds of the map, query the database with those bounds
+	function returnBounds(){		var xyvals = map.getBounds();		var xlow = xyvals.getSouthWest().lng;		var ylow = xyvals.getSouthWest().lat;		var xhigh = xyvals.getNorthEast().lng;		var yhigh = xyvals.getNorthEast().lat;
+		
+		/*test values
+		var xlow = 930000;		var ylow = 135000;		var xhigh = 1000000;		var yhigh = 145000;*/
+				console.log("xlow:" + xlow + ", xhigh:" + xhigh + ", ylow:" + ylow + ", yhigh:" + yhigh);
+		queryDB(xlow, ylow, xhigh, yhigh);
+	}
+	
+</script>
+</body>
+</html>

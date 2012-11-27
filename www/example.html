@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Leaflet GeoJSON example</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="leaflet/leaflet.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="../leaflet/leaflet.ie.css" /><![endif]-->
+	<script src="leaflet/leaflet-src.js"></script>
+	<!--<script src="../debug/leaflet-include.js"></script>-->
+</head>
+
+<body>
+<div id="map" style="width:100%; height: 650px;"></div>
+
+<script>
+	var map = new L.Map('map');
+	var cloudmadeUrl = 'http://{s}.tiles.mapbox.com/v2/georgiabullen.map-fgfrh2na/{z}/{x}/{y}.png',
+			cloudmadeAttribution = 'Map data &copy; 2012 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+			cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution});
+
+	map.setView(new L.LatLng(40.736, -73.996), 12).addLayer(cloudmade);		var geojson = new L.GeoJSON();		map.addLayer(geojson);		map.on('load', function(returnBounds){		var xyvals = map.getBounds();		var xlow = xyvals.getSouthWest().lng;		var ylow = xyvals.getSouthWest().lat;		var xhigh = xyvals.getNorthEast().lng;		var yhigh = xyvals.getNorthEast().lat;		console.log("xlow:" + xlow + ", xhigh:" + xhigh + ", ylow:" + ylow + ", yhigh:" + yhigh);				var data = $.get("http://weareherenow.org/query-geojson.php?xhigh="+xhigh+"&xlow="+xlow+"&yhigh="+yhigh+"&ylow="+ylow, function(data){			console.log(data);
+			JSON.parse(data);			geojson.addGeoJSON(data);		});			});		map.on('viewreset', function(returnBounds){		var xyvals = map.getBounds();		var xlow = xyvals.getSouthWest().lng;		var ylow = xyvals.getSouthWest().lat;		var xhigh = xyvals.getNorthEast().lng;		var yhigh = xyvals.getNorthEast().lat;		console.log("xlow:" + xlow + ", xhigh:" + xhigh + ", ylow:" + ylow + ", yhigh:" + yhigh);				var data = $.get("http://weareherenow.org/query-geojson.php?xhigh="+xhigh+"&xlow="+xlow+"&yhigh="+yhigh+"&ylow="+ylow, function(data){			console.log(data);
+			JSON.parse(data);			geojson.addGeoJSON(data);		});			});		map.on('dragend', function(returnBounds){		var xyvals = map.getBounds();		var xlow = xyvals.getSouthWest().lng;		var ylow = xyvals.getSouthWest().lat;		var xhigh = xyvals.getNorthEast().lng;		var yhigh = xyvals.getNorthEast().lat;		console.log("xlow:" + xlow + ", xhigh:" + xhigh + ", ylow:" + ylow + ", yhigh:" + yhigh);				var data = $.get("http://weareherenow.org/query-geojson.php?xhigh="+xhigh+"&xlow="+xlow+"&yhigh="+yhigh+"&ylow="+ylow, function(data){			console.log(data);
+			JSON.parse(data);			geojson.addGeoJSON(data);		});			});	
+</script><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</body>
+</html>
+<br />
