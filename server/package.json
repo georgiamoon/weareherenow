@@ -1,0 +1,19 @@
+{
+  "name": "weareherenow",
+  "description": "TODO",
+  "author": "<spatialinformationdesignlab@gmail.com>",
+  "dependencies": {
+    "async": ">= 1.2.0",
+    "mysql": ">= 0.1.0",
+    "underscore": "",
+    "csv": ">= 0.1.0",
+    "require": "",
+    "util": ""
+
+    
+  },
+  "devDependencies": {
+    "vows": "0.5.x"
+  },
+  "engine": "node 0.8.x"
+}
